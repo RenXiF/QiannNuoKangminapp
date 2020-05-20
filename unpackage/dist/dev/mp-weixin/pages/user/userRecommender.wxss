@@ -1,0 +1,68 @@
+
+page {
+	background-color: #f0f0f0;
+}
+.content {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	margin-top: 25px;
+}
+.text {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-pack: center;
+	-webkit-justify-content: center;
+	        justify-content: center;
+	margin-top: 50rpx;
+	margin-bottom: 30rpx;
+	font-size: 36rpx;
+	color: #666666;
+}
+.canvas {
+	margin-top: 50rpx;
+	text-align: center;
+}
+.canvas canvas {
+	margin: 0 auto;
+}
+.image {
+	width: 258rpx;
+	margin-top: 50rpx;
+	text-align: center;
+}
+.image image {
+	display: block;
+	width: 258rpx;
+	height: 258rpx;
+}
+.input {
+	width: 600rpx;
+	height: 40px;
+	margin: 50rpx 0;
+	padding: 0 20rpx;
+	border: 1px solid #b0b0b0;
+	border-radius: 5px;
+	background-color: #ffffff;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.button {
+	width: 690rpx;
+	margin: 10rpx;
+}
+.button:last-child {
+	margin-bottom: 50rpx;
+}
+

@@ -1,0 +1,1 @@
+<view class="content"><view class="text">我的推荐码</view><block wx:if="{{off==true}}"><view><canvas style="width:215px;height:215px;" canvas-id="qrcode"></canvas></view></block><block wx:else><button class="button" type="primary" data-event-opts="{{[['tap',[['getoff']]]]}}" bindtap="__e">点击打开二维码</button></block></view>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "云仓提货",
+  "usingComponents": {
+    "popup": "/components/basis/popup"
+  }
+}

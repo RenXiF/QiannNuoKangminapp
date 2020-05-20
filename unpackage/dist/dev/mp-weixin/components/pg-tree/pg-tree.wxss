@@ -1,0 +1,60 @@
+
+.pg-tree-list {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column;
+	        flex-direction: column;
+}
+.pg-tree-list .swipe-item {
+	height: 0;
+	opacity: 0;
+	-webkit-transition: 0.2s;
+	transition: 0.2s;
+}
+.pg-tree-list .swipe-item.show {
+	height: 90rpx;
+	opacity: 1;
+}
+.pg-tree-list .swipe-item .tree-item {
+	width: 100%;
+}
+.pg-tree-list .tree-item {
+	height: 0;
+	opacity: 0;
+	-webkit-transition: 0.2s;
+	transition: 0.2s;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	        align-items: center;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+	font-size: 30rpx;
+	color: #000;
+	background-color: #ffffff;
+}
+.pg-tree-list .tree-item image.choose {
+	width: 60rpx;
+	height: 60rpx;
+}
+.pg-tree-list .tree-item.show {
+	height: 50rpx;
+	opacity: 1;
+	padding: 20rpx 10rpx;
+	border-bottom: 1px solid #e4e4e4;
+}
+.pg-tree-list .tree-item .pg-tree-icon {
+	width: 30rpx;
+	height: 30rpx;
+	margin-right: 8rpx;
+}
+.pg-tree-list .tree-item .pg-tree-text {
+	padding-left: 20rpx;
+}
+

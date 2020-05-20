@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "首页",
+  "usingComponents": {
+    "custom-swiper": "/components/blackmonth-swiper/index",
+    "new-try": "/components/userList",
+    "pg-tree": "/components/pg-tree/pg-tree"
+  }
+}

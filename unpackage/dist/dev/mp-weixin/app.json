@@ -1,0 +1,57 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/user/user",
+    "pages/index/index_userlist",
+    "pages/index/index_userlist1",
+    "pages/index/order",
+    "pages/index/orderDetails",
+    "pages/user/Agent_audit",
+    "pages/user/Feedback",
+    "pages/user/FeedbackSpeed",
+    "pages/user/user_wallet",
+    "pages/user/LocalWarehouse",
+    "pages/index/Statistics",
+    "pages/user/userRecommender",
+    "pages/user/YunCang",
+    "pages/user/YunCpurchase",
+    "pages/user/YunCdelivery",
+    "pages/user/Authorization",
+    "pages/user/commodity",
+    "pages/user/purchase",
+    "pages/user/withdrawal",
+    "pages/index/hall",
+    "pages/user/register",
+    "pages/address/add_address",
+    "pages/address/management_address"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#A1A1A1",
+    "selectedColor": "#F23030",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "./static/icon/one.png",
+        "selectedIconPath": "static/icon/one.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "iconPath": "static/icon/7.png",
+        "selectedIconPath": "static/icon/7.png",
+        "text": "个人中心"
+      }
+    ]
+  },
+  "usingComponents": {},
+  "sitemapLocation": "sitemap48.json"
+}

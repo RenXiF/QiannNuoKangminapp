@@ -1,0 +1,179 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			// "style": {
+			// 	"app-plus": {
+			// 		"titleNView": false //禁用原生导航栏
+			// 	}
+			// }
+			"style": {
+				"navigationBarTitleText": "首页"
+			}
+		},
+		{
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarTitleText": "黔诺康管理系统"
+			}
+		},
+		{
+			"path": "pages/index/index_userlist",
+			"style": {
+				"navigationBarTitleText": "代理列表"
+			}
+		},
+		{
+			"path": "pages/index/index_userlist1",
+			"style": {
+				"navigationBarTitleText": "代理列表"
+			}
+		},
+		{
+			"path": "pages/index/order",
+			"style": {
+				"navigationBarTitleText": "我的订单"
+			}
+		},
+		{
+			"path": "pages/index/orderDetails",
+			"style": {
+				"navigationBarTitleText": "订单详情"
+			}
+		},
+		{
+			"path": "pages/user/Agent_audit",
+			"style": {
+				"navigationBarTitleText": "代理审核"
+			}
+		},
+		{
+			"path": "pages/user/Feedback",
+			"style": {
+				"navigationBarTitleText": "意见反馈"
+			}
+		},
+		{
+			"path": "pages/user/FeedbackSpeed",
+			"style": {
+				"navigationBarTitleText": "反馈进度"
+			}
+		},
+		{
+			"path": "pages/user/user_wallet",
+			"style": {
+				"navigationBarTitleText": "我的钱包"
+			}
+		},
+		{
+			"path": "pages/user/LocalWarehouse",
+			"style": {
+				"navigationBarTitleText": "云仓订单"
+			}
+		},
+		{
+			"path": "pages/index/Statistics",
+			"style": {
+				"navigationBarTitleText": "业绩统计"
+			}
+		},
+		{
+			"path": "pages/user/userRecommender",
+			"style": {
+				"navigationBarTitleText": "我的推荐码"
+			}
+		},
+		{
+			"path": "pages/user/YunCang",
+			"style": {
+				"navigationBarTitleText": "我的云仓"
+			}
+		},
+		{
+			"path": "pages/user/YunCpurchase",
+			"style": {
+				"navigationBarTitleText": "云仓进货"
+			}
+		},
+		{
+			"path": "pages/user/YunCdelivery",
+			"style": {
+				"navigationBarTitleText": "云仓提货"
+			}
+		},
+		{
+			"path": "pages/user/Authorization",
+			"style": {
+				"navigationBarTitleText": "我的授权函"
+			}
+		},
+		{
+			"path": "pages/user/commodity",
+			"style": {
+				"navigationBarTitleText": "提货"
+			}
+		},
+		{
+			"path": "pages/user/purchase",
+			"style": {
+				"navigationBarTitleText": "进货"
+			}
+		},
+		{
+			"path": "pages/user/withdrawal",
+			"style": {
+				"navigationBarTitleText": "本月订单结算"
+			}
+		},
+		{
+			"path": "pages/index/hall",
+			"style": {
+				"navigationBarTitleText": "业务大厅"
+			}
+		},
+		{
+			"path": "pages/user/register",
+			"style": {
+				"navigationBarTitleText": "注册页面"
+			}
+		},
+		{
+			"path": "pages/address/add_address",
+			"style": {
+				"navigationBarTitleText": "地址管理"
+			}
+		},
+		{
+			"path": "pages/address/management_address",
+			"style": {
+				"navigationBarTitleText": "我的收货地址"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#A1A1A1",
+		"selectedColor": "#F23030",
+		"backgroundColor": "#FFFFFF",
+		"borderStyle": "black",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"iconPath": "./static/icon/one.png",
+				"selectedIconPath": "static/icon/one.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/user/user",
+				"iconPath": "static/icon/7.png",
+				"selectedIconPath": "static/icon/7.png",
+				"text": "个人中心"
+			}
+		]
+	}
+}
