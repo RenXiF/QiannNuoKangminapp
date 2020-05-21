@@ -244,7 +244,6 @@ __webpack_require__.r(__webpack_exports__);
       onOff: true, //默认开启 展示
       onNO: false, //默认关闭 收起
       fold: false,
-
       swiperList: [
       {
         type: 'image',
@@ -425,7 +424,6 @@ __webpack_require__.r(__webpack_exports__);
 
       }
     },
-
     // 获取用户代理信息
     judgeUserlist: function judgeUserlist() {var _this = this;
       console.log(this.userlist);

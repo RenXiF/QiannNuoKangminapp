@@ -102,7 +102,6 @@ export default {
 			onOff: true, //默认开启 展示
 			onNO: false, //默认关闭 收起
 			fold: false,
-
 			swiperList: [
 				{
 					type: 'image',
@@ -283,7 +282,6 @@ export default {
 				})
 			}
 		},
-
 		// 获取用户代理信息
 		judgeUserlist: function() {
 			console.log(this.userlist);
@@ -313,25 +311,21 @@ ul {
 .page_edu {
 	width: 100%;
 }
-
 .page_edu_header {
 	padding-top: var(--status-bar-height);
 	background-color: #0bc99d;
 	width: 100%;
 	height: realSize(330px);
-
 	.header {
 		// display: flex;
 		display: none;
 		flex-direction: row;
 		align-items: center;
 		padding: realSize(20px);
-
 		.btn {
 			width: realSize(36px);
 			height: realSize(30px);
 		}
-
 		.input {
 			height: realSize(59px);
 			width: 100%;
@@ -342,7 +336,6 @@ ul {
 			display: flex;
 			flex-direction: row;
 			align-items: center;
-
 			.search {
 				width: realSize(30px);
 				height: realSize(30px);
@@ -351,11 +344,9 @@ ul {
 			}
 		}
 	}
-
 	.header_content {
 		display: flex;
 		flex-direction: row;
-
 		.left {
 			display: flex;
 			flex-direction: column;
@@ -363,7 +354,6 @@ ul {
 			margin-top: 10px;
 			margin-left: 15px;
 			margin-right: 15px;
-
 			.title {
 				width: realSize(419px);
 				height: realSize(59px);
@@ -371,19 +361,16 @@ ul {
 				font-weight: bold;
 				color: rgba(255, 255, 255, 1);
 			}
-
 			.sub_title {
 				margin-top: 3px;
 				// padding: 2px 5px;
 				font-size: realSize(18px);
 				font-weight: 400;
 				color: rgba(255, 255, 255, 1);
-
 				background: linear-gradient(0deg, rgba(120, 255, 224, 1) 0%, rgba(255, 255, 255, 1) 100%);
 				-webkit-background-clip: text;
 				-webkit-text-fill-color: transparent;
 			}
-
 			.btn {
 				margin-top: 3px;
 				width: realSize(198px);
@@ -402,7 +389,6 @@ ul {
 .page_content {
 	width: 100%;
 	margin-top: -74px;
-
 	.menu {
 		margin-left: 10px;
 		margin-right: 10px;
@@ -416,13 +402,11 @@ ul {
 		flex-direction: row;
 		align-items: stretch;
 		justify-content: space-between;
-
 		.item {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
-
 			.img_view {
 				width: 60px;
 				height: 60px;
@@ -430,13 +414,11 @@ ul {
 				display: flex;
 				align-items: center;
 				justify-content: center;
-
 				.image {
 					width: 50px;
 					height: 50px;
 				}
 			}
-
 			.txt {
 				margin-top: 5px;
 				font-size: 14px;
@@ -444,7 +426,6 @@ ul {
 			}
 		}
 	}
-
 	.s_menu {
 		// display: none;
 		display: flex;
@@ -456,19 +437,16 @@ ul {
 		margin-right: 10px;
 		padding-left: 10px;
 		padding-right: 10px;
-
 		.item {
 			// display: none;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
-
 			.image {
 				width: 35px;
 				height: 35px;
 			}
-
 			.txt {
 				margin-top: 5px;
 				font-size: 14px;
@@ -476,21 +454,18 @@ ul {
 			}
 		}
 	}
-
 	.ad {
 		width: 100%;
 		display: flex;
 		flex-direction: row;
 		align-items: center;
 		justify-content: center;
-
 		.bg {
 			position: absolute;
 			width: 120px;
 			height: 105px;
 			left: 0;
 		}
-
 		.ad_btn {
 			width: 100%;
 			height: 63px;
@@ -501,14 +476,12 @@ ul {
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
-
 			.title {
 				font-size: realSize(38px);
 				font-family: PingFang-SC-Heavy;
 				font-weight: 800;
 				color: rgba(255, 255, 255, 1);
 			}
-
 			.sub_title {
 				background: linear-gradient(0deg, rgba(255, 128, 37, 1), rgba(255, 153, 32, 1));
 				box-shadow: 0px 4px 5px 0px rgba(92, 53, 48, 0.3), 0px 1px 0px 0px rgba(228, 228, 228, 1);
@@ -523,7 +496,6 @@ ul {
 		}
 	}
 }
-
 .card_block_one{
 	width: 100%;
 	padding: 20px;
@@ -548,7 +520,6 @@ ul {
 	.card_block_two {
 		// width: 100%;
 		// height: 200px;
-
 		.tit_card_name {
 			min-width: 40%;
 			// height: 60%;
@@ -557,7 +528,6 @@ ul {
 				font-weight: 900;
 			}
 		}
-
 		.tit_card_details {
 			min-width: 50%;
 			height: 100%;
@@ -566,7 +536,6 @@ ul {
 				height: 20px;
 				padding-right: 10px;
 			}
-
 			.details_right {
 				display: flex;
 				align-items: center;
