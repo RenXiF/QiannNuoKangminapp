@@ -43,7 +43,8 @@
 }
 .card_block {
   width: 100%;
-  border-radius: 15px;
+  -webkit-border-radius: 15px;
+          border-radius: 15px;
   color: #ffffff;
   background: -webkit-gradient(linear, left top, left bottom, from(#e786af), to(#9986e7));
   background: -webkit-linear-gradient(#e786af, #9986e7);

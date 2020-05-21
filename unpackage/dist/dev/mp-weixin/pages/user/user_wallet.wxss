@@ -35,7 +35,8 @@
 .block_two {
   width: 86%;
   height: 170px;
-  border-radius: 15px;
+  -webkit-border-radius: 15px;
+          border-radius: 15px;
   background: -webkit-gradient(linear, left top, left bottom, from(#FF6462), to(#FF9365));
   background: -webkit-linear-gradient(#FF6462, #FF9365);
   background: linear-gradient(#FF6462, #FF9365);
@@ -89,7 +90,8 @@
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  border-radius: 15px;
+  -webkit-border-radius: 15px;
+          border-radius: 15px;
   background: #FFFFFF;
   -webkit-box-shadow: 1rpx 8rpx 13rpx #C0C0C0;
           box-shadow: 1rpx 8rpx 13rpx #C0C0C0;

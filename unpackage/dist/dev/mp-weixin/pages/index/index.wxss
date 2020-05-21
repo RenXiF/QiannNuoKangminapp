@@ -64,7 +64,8 @@ page {
   margin-left: 13.33333px;
   margin-right: 13.33333px;
   background: white;
-  border-radius: 20px;
+  -webkit-border-radius: 20px;
+          border-radius: 20px;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -130,7 +131,8 @@ page {
   background: linear-gradient(-30deg, #fc871d, #f6b909);
   -webkit-box-shadow: 0px 4px 10px 0px rgba(255, 121, 0, 0.5);
           box-shadow: 0px 4px 10px 0px rgba(255, 121, 0, 0.5);
-  border-radius: 20px;
+  -webkit-border-radius: 20px;
+          border-radius: 20px;
   color: white;
   display: -webkit-box;
   display: -webkit-flex;
@@ -155,7 +157,8 @@ page {
   background: white;
   -webkit-box-shadow: 0px 10px 10px 0px rgba(0, 161, 124, 0.1);
           box-shadow: 0px 10px 10px 0px rgba(0, 161, 124, 0.1);
-  border-radius: 10px;
+  -webkit-border-radius: 10px;
+          border-radius: 10px;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -188,7 +191,8 @@ page {
 .page_content .menu .item .img_view.data-v-9f2ee05c {
   width: 60px;
   height: 60px;
-  border-radius: 30px;
+  -webkit-border-radius: 30px;
+          border-radius: 30px;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -281,7 +285,8 @@ page {
   background: -webkit-gradient(linear, left bottom, left top, from(#fd9b1c), to(#fbc521));
   background: -webkit-linear-gradient(bottom, #fd9b1c, #fbc521);
   background: linear-gradient(0deg, #fd9b1c, #fbc521);
-  border-radius: 67px;
+  -webkit-border-radius: 67px;
+          border-radius: 67px;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -308,7 +313,8 @@ page {
   background: linear-gradient(0deg, #ff8025, #ff9920);
   -webkit-box-shadow: 0px 4px 5px 0px rgba(92, 53, 48, 0.3), 0px 1px 0px 0px #e4e4e4;
           box-shadow: 0px 4px 5px 0px rgba(92, 53, 48, 0.3), 0px 1px 0px 0px #e4e4e4;
-  border-radius: 16px;
+  -webkit-border-radius: 16px;
+          border-radius: 16px;
   font-size: 16px;
   font-family: PingFang-SC-Heavy;
   font-weight: 800;
@@ -322,7 +328,8 @@ page {
 }
 .card_block.data-v-9f2ee05c {
   width: 100%;
-  border-radius: 15px;
+  -webkit-border-radius: 15px;
+          border-radius: 15px;
   color: #ffffff;
   background: -webkit-gradient(linear, left top, left bottom, from(#e786af), to(#9986e7));
   background: -webkit-linear-gradient(#e786af, #9986e7);

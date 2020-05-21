@@ -57,7 +57,8 @@
   background-color: #fff4e0;
   font-size: 20rpx;
   color: #ffa600;
-  border-radius: 8rpx;
+  -webkit-border-radius: 8rpx;
+          border-radius: 8rpx;
   padding: 3rpx 5rpx;
   margin-right: 5rpx;
 }
@@ -89,7 +90,8 @@
   height: 90rpx;
   line-height: 90rpx;
   text-align: center;
-  border-radius: 15rpx;
+  -webkit-border-radius: 15rpx;
+          border-radius: 15rpx;
   border: 2rpx solid #ffa600;
   color: #ffa600;
   font-size: 30rpx;

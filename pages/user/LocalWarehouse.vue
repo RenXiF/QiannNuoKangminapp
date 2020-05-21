@@ -8,7 +8,7 @@
 		</view>
 		<view class="tab-nav">
 			<view v-for="(menuTab, index) in menuTabs" :key="index">
-				<view v-bind:id="'tabNum' + index" @click="swichMenu(index)" :class="[currentTab == index ? 'tab-nav-item tab-active' : 'tab-nav-item']">
+				<view v-bind:id="'tabNum' + index" @click="swichMenu(index)" :class="[currentTab == menuTab.state ? 'tab-nav-item tab-active' : 'tab-nav-item']">
 					{{ menuTab.name }}
 				</view>
 			</view>
@@ -48,9 +48,12 @@
 								<text>订单价格:</text>
 								<text class="text_Price">￥{{ menuList.payment }}</text>
 							</view>
+							<view class="aui-mail-button flex_row_reverse" v-if="paging!=0 && paging!=1">
+								<text class="aui-df-color" @click="Orderdetails(menuList)">查看订单</text>
+							</view>
 							<view class="aui-mail-button flex_row_reverse" v-if="paging==0">
 								<!-- <text :class="[menuList.status == 0 ? 'hd' : menuList.status == 2 ? '' : 'aui-df-color']">未发货</text> -->
-								<text :class="[menuList.status == 0 ? '' : 'aui-df-color']" v-if="menuList.status == 0">查看订单</text>
+								<text :class="[menuList.status == 0 ? '' : 'aui-df-color']" @click="Orderdetails(menuList)" v-if="menuList.status == 0">查看订单</text>
 								
 								<text :class="[menuList.status != 0 ? '' : 'aui-df-color']" v-if="menuList.status == 1" @click="Confirm(menuList.orderNo)">确认收货</text>
 								<text :class="[menuList.status < 1 ? '' : 'aui-df-color']" v-if="menuList.status > 1">已确认收货</text>
@@ -70,7 +73,7 @@
 			
 		</section>
 	</section>
-	<view style="height: 100%; width: 100%; text-align: center; font-size: 30px;" v-if="menuLists.length<1">
+	<view style="height: 100%; width: 100%; text-align: center; font-size: 30px;" v-if="menuLists==null">
 		<text>暂无订单</text>
 	</view>
 	
@@ -84,20 +87,21 @@ export default {
 			input:'',//用户输入运单号
 			inputoff:false,//控制input输入显示
 			paging:0,//控制顶部页面选项
+			pageNum:1,
 			scrollLeft: 0,
 			isClickChange: false,
 			currentTab0: 0,
 			currentTab: 0,
-			menuTabs0: [{name: '我的进货单'},
-				{name: '我的提货单'},
-				{name: '我的下级进货单'},
-				{name: '我的下级提货单'}
+			menuTabs0: [{name: '我的进货单',state:0},
+				{name: '我的提货单',state:1},
+				{name: '我的下级进货单',state:2},
+				{name: '我的下级提货单',state:3}
 			],
-			menuTabs: [{name: '全部'},
-				{name: '未发货'},
-				{name: '已发货'},
-				{name: '交易完成'},
-				{name: '异常关闭'}
+			menuTabs: [{name: '全部',state:0},
+				{name: '未发货',state:1},
+				{name: '已发货',state:2},
+				{name: '交易完成',state:3},
+				{name: '异常关闭',state:4}
 			],
 			menuLists: [],//加载订单
 			userlist: '' //用户缓存
@@ -109,10 +113,25 @@ export default {
 		this.judgeOrder();
 	},
 	methods: {
-		//查看订单
-		Orderdetails(item){
-			console.log(item);
-			this.doUrl('pages/index/orderDetails',item);
+		//下拉刷新
+		onPullDownRefresh() {
+			console.log('下拉刷新');
+			this.swichMenu(this.currentTab);
+			this.utils.success('刷新成功！',()=>{
+				uni.stopPullDownRefresh();
+			});
+		},
+		//触底加载更多
+		onReachBottom() {
+			if (this.menuLists==null) {
+				return;
+			} else{
+				if (this.paging==0) {
+				this.judgeOrder();
+				} else{
+					this.abnormalOrder(this.currentTab);
+				}
+			}
 		},
 		// 更新用户信息
 		updateUser: function(data) {
@@ -130,6 +149,11 @@ export default {
 				.catch(err => {
 				});
 		},
+		// 查看订单
+		Orderdetails(item){
+			console.log(item);
+			this.doUrl('pages/index/orderDetails',item);
+		},
 		// 确认收货
 		Confirm(e){
 			// let e = e;
@@ -138,6 +162,7 @@ export default {
 			.then(res => {
 				// this.menuLists = res.data.list;
 				console.log(res);
+				this.pageNum = 1;
 				this.utils.success('操作成功！',()=>{
 					uni.hideLoading();
 					this.updateUser(this.userlist.storeOpendid);
@@ -197,11 +222,14 @@ export default {
 			if (this.currentTab == current) {
 				return false;
 			} else {
+				// console.log(current);
 				if (current == 0) {
 					this.currentTab = current;
+					this.pageNum = 1;
 					this.judgeOrder();
 				} else {
 					this.currentTab = current;
+					this.pageNum = 1;
 					this.abnormalOrder(current);
 				}
 			}
@@ -213,9 +241,11 @@ export default {
 			} else {
 				if (e == 0) {
 					this.paging = e;
+					this.pageNum = 1;
 					this.judgeOrder();
 				} else {
 					this.paging = e;
+					this.pageNum = 1;
 					this.abnormalOrder(e);
 				}
 			}
@@ -224,11 +254,21 @@ export default {
 		judgeOrder() {
 			this.utils.showloading();
 			if (this.paging==0) {
-				this.http.getApi('/yunorder/selectMyAll', { uid: this.userlist.id, pageNum: 1, pageSize: 20 }, 'get', this.userlist.storeOpendid)
+				this.http.getApi('/yunorder/selectMyAll', { uid: this.userlist.id, pageNum: this.pageNum, pageSize: 10 }, 'get', this.userlist.storeOpendid)
 				.then(res => {
 					uni.hideLoading();
-					this.menuLists = res.data.list;
 					console.log(res);
+					if (res.data.list.length==0) {
+						if (this.pageNum==1) {
+							this.menuLists = null;
+						} else{
+							this.utils.error('暂无更多');
+							console.log('------暂无更多------');
+						}
+					} else{
+						this.menuLists = this.pageNum>1 ? this.menuLists.concat(res.data.list) : res.data.list;
+						this.pageNum = res.data.pageNum == this.pageNum ? this.pageNum+1 : this.pageNum;
+					}
 				})
 				.catch(err => {
 					uni.hideLoading();
@@ -236,11 +276,21 @@ export default {
 				});
 			}
 			if (this.paging==1) {
-				this.http.getApi('/yunorder/selectMyAlltifyingTwo', { uid: this.userlist.id, pageNum: 1, pageSize: 20 }, 'get', this.userlist.storeOpendid)
+				this.http.getApi('/yunorder/selectMyAlltifyingTwo', { uid: this.userlist.id, pageNum: this.pageNum, pageSize: 10 }, 'get', this.userlist.storeOpendid)
 				.then(res => {
 					uni.hideLoading();
-					this.menuLists = res.data.list;
 					console.log(res);
+					if (res.data.list.length==0) {
+						if (this.pageNum==1) {
+							this.menuLists = null;
+						} else{
+							this.utils.error('暂无更多');
+							console.log('------暂无更多------');
+						}
+					} else{
+						this.menuLists = this.pageNum>1 ? this.menuLists.concat(res.data.list) : res.data.list;
+						this.pageNum = res.data.pageNum == this.pageNum ? this.pageNum+1 : this.pageNum;
+					}
 				})
 				.catch(err => {
 					uni.hideLoading();
@@ -248,23 +298,43 @@ export default {
 				});
 			}
 			if (this.paging==2) {
-				this.http.getApi('/yunorder/getorder', { uid: this.userlist.id, pageNum: 1, pageSize: 20 }, 'get', this.userlist.storeOpendid)
+				this.http.getApi('/yunorder/getorder', { uid: this.userlist.id, pageNum: this.pageNum, pageSize: 10 }, 'get', this.userlist.storeOpendid)
 				.then(res => {
 					uni.hideLoading();
-					this.menuLists = res.data.list;
 					console.log(res);
+					if (res.data.list.length==0) {
+						if (this.pageNum==1) {
+							this.menuLists = null;
+						} else{
+							this.utils.error('暂无更多');
+							console.log('------暂无更多------');
+						}
+					} else{
+						this.menuLists = this.pageNum>1 ? this.menuLists.concat(res.data.list) : res.data.list;
+						this.pageNum = res.data.pageNum == this.pageNum ? this.pageNum+1 : this.pageNum;
+					}
 				})
 				.catch(err => {
 					uni.hideLoading();
 					console.log(err);
 				});
 			}
-			else{
-				this.http.getApi('/yunorder/getorderTwo', { uid: this.userlist.id, pageNum: 1, pageSize: 20 }, 'get', this.userlist.storeOpendid)
+			if (this.paging==3){
+				this.http.getApi('/yunorder/getorderTwo', { uid: this.userlist.id, pageNum: this.pageNum, pageSize: 10 }, 'get', this.userlist.storeOpendid)
 				.then(res => {
 					uni.hideLoading();
-					this.menuLists = res.data.list;
 					console.log(res);
+					if (res.data.list.length==0) {
+						if (this.pageNum==1) {
+							this.menuLists = null;
+						} else{
+							this.utils.error('暂无更多');
+							console.log('------暂无更多------');
+						}
+					} else{
+						this.menuLists = this.pageNum>1 ? this.menuLists.concat(res.data.list) : res.data.list;
+						this.pageNum = res.data.pageNum == this.pageNum ? this.pageNum+1 : this.pageNum;
+					}
 				})
 				.catch(err => {
 					uni.hideLoading();
@@ -278,22 +348,22 @@ export default {
 			let com = current;
 			this.utils.showloading();
 			if (this.paging==0) {
-				// this.http.getApi('/order/getmyorderStusas', { myId: this.userlist.id, status: com - 1, pageNum: 1, pageSize: 20 }, 'get', this.userlist.storeOpendid)
-				// .then(res => {
-				// 	uni.hideLoading();
-				// 	this.menuLists = res.data.list;
-				// 	console.log(res);
-				// })
-				// .catch(err => {
-				// 	uni.hideLoading();
-				// 	console.log(err);
-				// });
 				if(current==1){
-					this.http.getApi('/yunorder/statusZero', { uid: this.userlist.id, pageNum: 1, pageSize: 20 }, 'get', this.userlist.storeOpendid)
+					this.http.getApi('/yunorder/statusZero', { uid: this.userlist.id, pageNum: this.pageNum, pageSize: 10 }, 'get', this.userlist.storeOpendid)
 					.then(res => {
 						uni.hideLoading();
-						this.menuLists = res.data.list;
 						console.log(res);
+						if (res.data.list.length==0) {
+							if (this.pageNum==1) {
+								this.menuLists = null;
+							} else{
+								this.utils.error('暂无更多');;
+							console.log('------暂无更多------');
+							}
+						} else{
+							this.menuLists = this.pageNum>1 ? this.menuLists.concat(res.data.list) : res.data.list;
+							this.pageNum = res.data.pageNum == this.pageNum ? this.pageNum+1 : this.pageNum;
+						}
 					})
 					.catch(err => {
 						uni.hideLoading();
@@ -301,11 +371,21 @@ export default {
 					});
 				}
 				if(current==2){
-					this.http.getApi('/yunorder/statusOne', { uid: this.userlist.id, pageNum: 1, pageSize: 20 }, 'get', this.userlist.storeOpendid)
+					this.http.getApi('/yunorder/statusOne', { uid: this.userlist.id, pageNum: this.pageNum, pageSize: 10 }, 'get', this.userlist.storeOpendid)
 					.then(res => {
 						uni.hideLoading();
-						this.menuLists = res.data.list;
 						console.log(res);
+						if (res.data.list.length==0) {
+							if (this.pageNum==1) {
+								this.menuLists = null;
+							} else{
+								this.utils.error('暂无更多');
+							console.log('------暂无更多------');
+							}
+						} else{
+							this.menuLists = this.pageNum>1 ? this.menuLists.concat(res.data.list) : res.data.list;
+							this.pageNum = res.data.pageNum == this.pageNum ? this.pageNum+1 : this.pageNum;
+						}
 					})
 					.catch(err => {
 						uni.hideLoading();
@@ -313,11 +393,21 @@ export default {
 					});
 				}
 				if(current==3){
-					this.http.getApi('/yunorder/statusOk', { uid: this.userlist.id, pageNum: 1, pageSize: 20 }, 'get', this.userlist.storeOpendid)
+					this.http.getApi('/yunorder/statusOk', { uid: this.userlist.id, pageNum: this.pageNum, pageSize: 10 }, 'get', this.userlist.storeOpendid)
 					.then(res => {
 						uni.hideLoading();
-						this.menuLists = res.data.list;
 						console.log(res);
+						if (res.data.list.length==0) {
+							if (this.pageNum==1) {
+								this.menuLists = null;
+							} else{
+								this.utils.error('暂无更多');
+							console.log('------暂无更多------');
+							}
+						} else{
+							this.menuLists = this.pageNum>1 ? this.menuLists.concat(res.data.list) : res.data.list;
+							this.pageNum = res.data.pageNum == this.pageNum ? this.pageNum+1 : this.pageNum;
+						}
 					})
 					.catch(err => {
 						uni.hideLoading();
@@ -333,11 +423,21 @@ export default {
 			} 
 			if (this.paging==1) {
 				if(current==1){
-					this.http.getApi('/yunorder/statusZerotifyingTwo', { uid: this.userlist.id, pageNum: 1, pageSize: 20 }, 'get', this.userlist.storeOpendid)
+					this.http.getApi('/yunorder/statusZerotifyingTwo', { uid: this.userlist.id, pageNum: this.pageNum, pageSize: 10 }, 'get', this.userlist.storeOpendid)
 					.then(res => {
 						uni.hideLoading();
-						this.menuLists = res.data.list;
 						console.log(res);
+						if (res.data.list.length==0) {
+							if (this.pageNum==1) {
+								this.menuLists = null;
+							} else{
+								this.utils.error('暂无更多');
+							console.log('------暂无更多------');
+							}
+						} else{
+							this.menuLists = this.pageNum>1 ? this.menuLists.concat(res.data.list) : res.data.list;
+							this.pageNum = res.data.pageNum == this.pageNum ? this.pageNum+1 : this.pageNum;
+						}
 					})
 					.catch(err => {
 						uni.hideLoading();
@@ -345,11 +445,21 @@ export default {
 					});
 				}
 				if(current==2){
-					this.http.getApi('/yunorder/statusOnetifyingTwo', { uid: this.userlist.id, pageNum: 1, pageSize: 20 }, 'get', this.userlist.storeOpendid)
+					this.http.getApi('/yunorder/statusOnetifyingTwo', { uid: this.userlist.id, pageNum: this.pageNum, pageSize: 10 }, 'get', this.userlist.storeOpendid)
 					.then(res => {
 						uni.hideLoading();
-						this.menuLists = res.data.list;
 						console.log(res);
+						if (res.data.list.length==0) {
+							if (this.pageNum==1) {
+								this.menuLists = null;
+							} else{
+								this.utils.error('暂无更多');
+							console.log('------暂无更多------');
+							}
+						} else{
+							this.menuLists = this.pageNum>1 ? this.menuLists.concat(res.data.list) : res.data.list;
+							this.pageNum = res.data.pageNum == this.pageNum ? this.pageNum+1 : this.pageNum;
+						}
 					})
 					.catch(err => {
 						uni.hideLoading();
@@ -357,11 +467,21 @@ export default {
 					});
 				}
 				if(current==3){
-					this.http.getApi('/yunorder/statusOktifyingTwo', { uid: this.userlist.id, pageNum: 1, pageSize: 20 }, 'get', this.userlist.storeOpendid)
+					this.http.getApi('/yunorder/statusOktifyingTwo', { uid: this.userlist.id, pageNum: this.pageNum, pageSize: 10 }, 'get', this.userlist.storeOpendid)
 					.then(res => {
 						uni.hideLoading();
-						this.menuLists = res.data.list;
 						console.log(res);
+						if (res.data.list.length==0) {
+							if (this.pageNum==1) {
+								this.menuLists = null;
+							} else{
+								this.utils.error('暂无更多');
+							console.log('------暂无更多------');
+							}
+						} else{
+							this.menuLists = this.pageNum>1 ? this.menuLists.concat(res.data.list) : res.data.list;
+							this.pageNum = res.data.pageNum == this.pageNum ? this.pageNum+1 : this.pageNum;
+						}
 					})
 					.catch(err => {
 						uni.hideLoading();
@@ -376,12 +496,24 @@ export default {
 				}
 			}
 			if (this.paging==2) {
+				console.log('zheli');
+				console.log(current);
 				if(current!=0){
-					this.http.getApi('/yunorder/fifyOne', { status:com-1, uid: this.userlist.id, pageNum: 1, pageSize: 20 }, 'get', this.userlist.storeOpendid)
+					this.http.getApi('/yunorder/fifyOne', { status:com-1, uid: this.userlist.id, pageNum: this.pageNum, pageSize: 10 }, 'get', this.userlist.storeOpendid)
 					.then(res => {
 						uni.hideLoading();
-						this.menuLists = res.data.list;
 						console.log(res);
+						if (res.data.list.length==0) {
+							if (this.pageNum==1) {
+								this.menuLists = null;
+							} else{
+								this.utils.error('暂无更多');
+							console.log('------暂无更多------');
+							}
+						} else{
+							this.menuLists = this.pageNum>1 ? this.menuLists.concat(res.data.list) : res.data.list;
+							this.pageNum = res.data.pageNum == this.pageNum ? this.pageNum+1 : this.pageNum;
+						}
 					})
 					.catch(err => {
 						uni.hideLoading();
@@ -400,11 +532,21 @@ export default {
 			else{
 				if (this.paging==3) {
 					if(current!=0){
-						this.http.getApi('/yunorder/fifyTow', { status:com-1, uid: this.userlist.id, pageNum: 1, pageSize: 20 }, 'get', this.userlist.storeOpendid)
+						this.http.getApi('/yunorder/fifyTow', { status:com-1, uid: this.userlist.id, pageNum: this.pageNum, pageSize: 10 }, 'get', this.userlist.storeOpendid)
 						.then(res => {
 							uni.hideLoading();
-							this.menuLists = res.data.list;
 							console.log(res);
+							if (res.data.list.length==0) {
+								if (this.pageNum==1) {
+									this.menuLists = null;
+								} else{
+									this.utils.error('暂无更多');
+							console.log('------暂无更多------');
+								}
+							} else{
+								this.menuLists = this.pageNum>1 ? this.menuLists.concat(res.data.list) : res.data.list;
+								this.pageNum = res.data.pageNum == this.pageNum ? this.pageNum+1 : this.pageNum;
+							}
 						})
 						.catch(err => {
 							uni.hideLoading();

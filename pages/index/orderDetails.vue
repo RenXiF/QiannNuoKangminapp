@@ -5,8 +5,8 @@
 			<view class="one_block flex_columns">
 				<view class="noe_tit_b flex-between">
 					<view class="noe_b_left flex_columns">
-						<text>创建时间：{{orderlist.createTime.substring(0,16)}}</text>
-						<text>更新时间：{{orderlist.updateTime.substring(0,16)}}</text>
+						<text v-if="orderlist.createTime">创建时间：{{orderlist.createTime.substring(0,16)}}</text>
+						<text v-if="orderlist.updateTime">更新时间：{{orderlist.updateTime.substring(0,16)}}</text>
 						<text>数量：{{itemlist.quantity}} 盒</text>
 						<text>收货人：{{orderlist.receiverName}}</text>
 						<text>收货地址：{{orderlist.receiverProvince}}{{orderlist.receiverCity}}{{orderlist.receiverDistrict}}{{orderlist.receiverAddress}}</text>
@@ -24,7 +24,7 @@
 				</view>
 			</view>
 		</view>
-		<view style="height: 100%; width: 100%; text-align: center; font-size: 30px;"else>
+		<view style="height: 100%; width: 100%; text-align: center; font-size: 30px;" v-else>
 			<text>暂无详情订单</text>
 		</view>
 	</view>
@@ -48,9 +48,13 @@
 			console.log(item);
 			this.storeOpendid = uni.getStorageSync('Opendid'); //加载缓存
 			if (item) {
-				
+				// console.log(item)
 				if (!item.sparetwo) {
-					this.orderDetails(item.addressid);
+					if (item.addressid) {
+						this.orderDetails(item.addressid);
+					} else{
+						this.orderDetails(item.adderss);
+					}
 				} else{
 					this.orderDetails(item.sparetwo);
 				}
@@ -63,6 +67,7 @@
 		
 		methods: {
 			orderDetails(e){
+				
 				this.utils.showloading();
 				this.http.getApi('/shippings/GetShipping', {ShippingID:e }, 'get', this.storeOpendid)
 				.then(res => {

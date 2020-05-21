@@ -36,7 +36,8 @@
 .index_commodity .one_block {
   width: 100%;
   padding: 10px 20px;
-  border-radius: 15px;
+  -webkit-border-radius: 15px;
+          border-radius: 15px;
   background-color: #DD524D;
 }
 .index_commodity .one_block .noe_tit_b {
@@ -59,6 +60,7 @@
 }
 .index_commodity .one_block .noe_tit_b .noe_b_right image {
   max-width: 80px;
-  border-radius: 15px;
+  -webkit-border-radius: 15px;
+          border-radius: 15px;
 }
 

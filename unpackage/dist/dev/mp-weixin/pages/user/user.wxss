@@ -29,7 +29,8 @@ page {
 }
 .profily,
 .profily_header {
-  border-radius: 8px;
+  -webkit-border-radius: 8px;
+          border-radius: 8px;
 }
 .center {
   height: 100%;
@@ -78,12 +79,14 @@ page {
 }
 .base .profily_header image {
   width: 100%;
-  border-radius: 8px;
+  -webkit-border-radius: 8px;
+          border-radius: 8px;
 }
 .base .text_b {
   font-size: 12px;
   color: #f0ad4e;
-  border-radius: 3px;
+  -webkit-border-radius: 3px;
+          border-radius: 3px;
   padding: 0 5px;
 }
 .base .mess_information text {
@@ -107,7 +110,8 @@ page {
   background: -webkit-gradient(linear, left bottom, left top, from(#f63e64), to(#f46a67));
   background: -webkit-linear-gradient(bottom, #f63e64, #f46a67);
   background: linear-gradient(0deg, #f63e64, #f46a67);
-  border-radius: 15px;
+  -webkit-border-radius: 15px;
+          border-radius: 15px;
 }
 .base .text_c text {
   font-size: 7px;

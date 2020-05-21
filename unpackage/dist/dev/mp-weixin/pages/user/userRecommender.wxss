@@ -53,7 +53,8 @@ page {
 	margin: 50rpx 0;
 	padding: 0 20rpx;
 	border: 1px solid #b0b0b0;
-	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	        border-radius: 5px;
 	background-color: #ffffff;
 	-webkit-box-sizing: border-box;
 	        box-sizing: border-box;

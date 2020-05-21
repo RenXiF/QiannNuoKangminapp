@@ -37,7 +37,8 @@
 .index .index_Feedback textarea {
   width: 95%;
   min-height: 100px;
-  border-radius: 15px;
+  -webkit-border-radius: 15px;
+          border-radius: 15px;
   padding: 10px;
   background-color: #F1F3F4;
 }
@@ -50,7 +51,8 @@
   background: -webkit-gradient(linear, left bottom, left top, from(#f63e64), to(#f46a67));
   background: -webkit-linear-gradient(bottom, #f63e64, #f46a67);
   background: linear-gradient(0deg, #f63e64, #f46a67);
-  border-radius: 15px;
+  -webkit-border-radius: 15px;
+          border-radius: 15px;
   font-size: 25px;
 }
 

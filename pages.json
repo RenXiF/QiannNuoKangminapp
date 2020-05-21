@@ -32,7 +32,8 @@
 		{
 			"path": "pages/index/order",
 			"style": {
-				"navigationBarTitleText": "我的订单"
+				"navigationBarTitleText": "我的订单",
+				"enablePullDownRefresh": true
 			}
 		},
 		{
@@ -68,7 +69,8 @@
 		{
 			"path": "pages/user/LocalWarehouse",
 			"style": {
-				"navigationBarTitleText": "云仓订单"
+				"navigationBarTitleText": "云仓订单",
+				"enablePullDownRefresh": true
 			}
 		},
 		{
