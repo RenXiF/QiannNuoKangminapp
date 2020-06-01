@@ -23,12 +23,12 @@
 		<!-- 功能块 -->
 		<view class="page_content">
 			<view class="menu">
-				<template v-for="(item, index) in menus">
+				<view class="flex-center" v-for="(item, index) in menus" :key='index'>
 					<view class="item" @click="doUrl(item.http)">
 						<view class="img_view" :style="{ background: item.bg }"><image :src="item.icon" class="image"></image></view>
 						<text class="txt">{{ item.txt }}</text>
 					</view>
-				</template>
+				</view>
 			</view>
 
 			<view><customSwiper :swiper-list="swiperList" /></view>
@@ -260,8 +260,7 @@ export default {
 		
 		// 获取下标
 		selectTypeChange(){
-			 let index = this.$refs.addRequestState.value
-			 console.log("index："+index)
+			let index = this.$refs.addRequestState.value;
 			if(index == this.selectTypeLists[0].value){
 				this.wxDepositShow=true;
 			}else{
@@ -271,7 +270,6 @@ export default {
 		},
 		
 		xiajidaili(item){
-			console.log(item);
 			if (item.isok==true) {
 				this.doUrl('pages/index/index_userlist',item);
 			} else{

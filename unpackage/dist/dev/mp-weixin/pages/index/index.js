@@ -403,7 +403,6 @@ __webpack_require__.r(__webpack_exports__);
     // 获取下标
     selectTypeChange: function selectTypeChange() {
       var index = this.$refs.addRequestState.value;
-      console.log("index：" + index);
       if (index == this.selectTypeLists[0].value) {
         this.wxDepositShow = true;
       } else {
@@ -413,7 +412,6 @@ __webpack_require__.r(__webpack_exports__);
     },
 
     xiajidaili: function xiajidaili(item) {
-      console.log(item);
       if (item.isok == true) {
         this.doUrl('pages/index/index_userlist', item);
       } else {

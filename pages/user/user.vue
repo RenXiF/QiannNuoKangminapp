@@ -39,7 +39,7 @@
 					<text class="text_c" @click="qingchu()" v-show="userlist">退出登录</text>
 				</view>
 				<view class="order_status">
-					<view class="status" v-for="item in status" @click="doUrl(item.http)">
+					<view class="status" v-for="item in status" :key='index' @click="doUrl(item.http)">
 						<image class="icon" :src="item.url" mode="aspectFill"></image>
 						<text>{{ item.name }}</text>
 					</view>
@@ -47,7 +47,7 @@
 			</view>
 			<view class="baiban"></view>
 			<view class="center_menu">
-				<view class="menu_item" v-for="item in menus" @click="doUrl(item.http,{key:item.key})">
+				<view class="menu_item" v-for="item in menus" :key='index' @click="doUrl(item.http,{key:item.key})">
 					<image :src="item.icon" mode="aspectFill"></image>
 					<text>{{ item.name }}</text>
 				</view>
