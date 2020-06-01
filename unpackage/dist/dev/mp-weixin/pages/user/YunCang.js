@@ -183,7 +183,7 @@ var _default =
     this.userlist = uni.getStorageSync('userlist'); //加载用户缓存
     console.log(this.userlist);
     if (this.userlist.storeMoneysum != 1) {
-      this.utils.success('您的等级不足！', function () {
+      this.utils.error('您的等级不足！', function () {
         _this.utils.navback();
       });
     }

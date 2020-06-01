@@ -12,34 +12,25 @@
 						<view class="">
 							<text v-show="userlist.storeUsername">{{ userlist.storeUsername }}</text>
 							<text v-show="!userlist.storeUsername">未登录</text>
-							<!-- <text class="text_b">*总代理</text> -->
 							<text class="text_b" v-if="userlist.storeRole == 0">直系代理</text>
 							<text class="text_b" v-if="userlist.storeRole == 1">总代理</text>
 							<text class="text_b" v-if="userlist.storeRole == 2">省代理</text>
 							<text class="text_b" v-if="userlist.storeRole == 3">市代理</text>
 						</view>
 						<view class="mess_information">
-							<!-- <text>我的库存：{{userlist.spareTwo}}盒</text> -->
 							<text v-show="userlist.spareTwo">云仓库存：{{userlist.spareTwo}} 盒</text>
 							<text v-show="!userlist.spareTwo">云仓库存：0</text>
-							<!-- <text>直属代理：3</text> -->
 						</view>
 						<view class="mess_information">
-							<!-- <text>我的库存：{{userlist.spareTwo}}盒</text> -->
 							<text v-show="userlist.spareThree">累计进货：{{userlist.spareThree}} 盒</text>
 							<text v-show="!userlist.spareThree">累计进货：0</text>
-							<!-- <text>直属代理：3</text> -->
 						</view>
 					</view>
-
-					<!-- <image src="../../static/icon/setting.png" mode=""></image> -->
-					<!-- <text class="text_c" @click="doUrl('/pages/user/sregister')">注册</text> -->
 					<text class="text_c" @click="login()" v-show="!userlist">登录</text>
-					<!-- <button class="text_c" @click="appLogin">APP微信授权登录</button> -->
 					<text class="text_c" @click="qingchu()" v-show="userlist">退出登录</text>
 				</view>
 				<view class="order_status">
-					<view class="status" v-for="item in status" :key='index' @click="doUrl(item.http)">
+					<view class="status" v-for="(item,index) in status" :key='index' @click="doUrl(item.http)">
 						<image class="icon" :src="item.url" mode="aspectFill"></image>
 						<text>{{ item.name }}</text>
 					</view>
@@ -47,7 +38,7 @@
 			</view>
 			<view class="baiban"></view>
 			<view class="center_menu">
-				<view class="menu_item" v-for="item in menus" :key='index' @click="doUrl(item.http,{key:item.key})">
+				<view class="menu_item" v-for="(item,index) in menus" :key='index' @click="doUrl(item.http,{key:item.key})">
 					<image :src="item.icon" mode="aspectFill"></image>
 					<text>{{ item.name }}</text>
 				</view>

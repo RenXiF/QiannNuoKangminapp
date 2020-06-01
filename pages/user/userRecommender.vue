@@ -13,7 +13,6 @@
 
 <script>
 	import uQRCode from '@/common/uqrcode.js'
-
 	export default {
 		data() {
 			return {
@@ -28,27 +27,21 @@
 			this.userlist = uni.getStorageSync('userlist'); //加载用户缓存
 			console.log(this.userlist);
 			console.log(this.qrcodeText);
-			// this.getoff();
 		},
 		methods: {
 			getoff(){
 				if (this.userlist.id!='' && this.userlist.spareThree >=30) {
 					this.qrcodeText = this.userlist.id+'';
-					
-					console.log(this.qrcodeText);
 					this.make(this.qrcodeText);
 					this.off = true;
 				} else{
 					let _this = this;
 					uni.showModal({
-					    title: '该用户未达到',
-					    content: '点击确定前往提货页面',
+					    title: '该用户数量未达到',
+					    content: '点击确定前往进货页面',
 					    success: function (res) {
 					        if (res.confirm) {
 					            console.log('用户点击确定');
-								// uni.switchTab({
-								//     url: '/pages/user/register'
-								// });
 								_this.doUrl('pages/user/purchase');
 					        } else if (res.cancel) {
 					            console.log('用户点击取消');

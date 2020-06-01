@@ -33,7 +33,7 @@
 			
 			<view class="flex-between">
 				<view class="bl_kuan flex_columns">
-					<view class="three_one_blk flex_columns" v-for="(item,index) in storeOrdersOne" v-if="storeOrdersOne.length>1">
+					<view class="three_one_blk flex_columns" v-for="(item,index) in storeOrdersOne" :key='index' v-if="storeOrdersOne.length>1">
 						<view class="three_txt_one flex-between">
 							<text>数量:</text>
 							<text class="three_txt_a">{{item.quantity}} 盒</text>
@@ -52,7 +52,7 @@
 					</view>
 				</view>
 				<view class="bl_kuan flex_columns">
-					<view class="three_one_blk flex_columns" v-for="(item,index) in yunOrdersOne" v-if="yunOrdersOne.length>1">
+					<view class="three_one_blk flex_columns" v-for="(item,index) in yunOrdersOne" :key='index' v-if="yunOrdersOne.length>1">
 						<view class="three_txt_one flex-between">
 							<text>数量:</text>
 							<text class="three_txt_a">{{item.quantity}} 盒</text>
@@ -102,6 +102,7 @@
 			// 本月结算
 			Settlement() {
 				this.utils.showloading();
+				// uni.showLoading();
 				this.http.getApi('/order/MonthGetOrder',{myId:this.userlist.id,status:this.key},'get',this.userlist.storeOpendid).then(res=>{
 					console.log(res);
 					this.sum = res.data.sum;
@@ -111,6 +112,7 @@
 					// uni.hideLoading();
 					this.utils.success('查询成功！',()=>{
 						// this.utils.navback();
+						uni.hideLoading();
 					})
 				}).catch(err=>{
 					uni.hideLoading();

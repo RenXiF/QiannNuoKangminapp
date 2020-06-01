@@ -288,6 +288,7 @@ var _default =
     // 本月结算
     Settlement: function Settlement() {var _this = this;
       this.utils.showloading();
+      // uni.showLoading();
       this.http.getApi('/order/MonthGetOrder', { myId: this.userlist.id, status: this.key }, 'get', this.userlist.storeOpendid).then(function (res) {
         console.log(res);
         _this.sum = res.data.sum;
@@ -297,6 +298,7 @@ var _default =
         // uni.hideLoading();
         _this.utils.success('查询成功！', function () {
           // this.utils.navback();
+          uni.hideLoading();
         });
       }).catch(function (err) {
         uni.hideLoading();
