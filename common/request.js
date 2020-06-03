@@ -1,15 +1,11 @@
 const utils = require('@/common/util.js');
-//export const ApiServer = 'https://www.tcwanrenbang.cn/';
-//export const ApiServer = 'http://192.168.2.189:9527/';
 // export const ApiServer = 'http://47.93.91.21:8080/';
 export const ApiServer = 'https://www.ulvdbrv.cn/';
 // export const ApiServer = 'http://192.168.0.12:8080/';
 export const AppId = 'wx50b9df64d4785714';
 export const amap = require('./amap.js');
 export const AmapObj = new amap.AMapWX({
-	// key: '514fc08a59aa59c024f149746a778641',
 		 key:'7ec4b9767a8dbd46e8b03d4949c37237' ,
-	
 });
 /**
  * 接口调用-同步
@@ -293,3 +289,4 @@ export function getAreaId(name) {
 		});
 	})
 }
+/* 代码作者：任锡方 */
